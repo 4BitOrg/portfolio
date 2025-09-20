@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4Bit Team | Professional Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzRBOUVGRiIvPgo8cGF0aCBkPSJNOCAyNEgyNFYyMEg4VjI0Wk04IDE2SDI0VjEySDhWMTZaTTggOEgyNFY0SDhWOFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDAiIGZpbGw9IiM0QTlFRkYiLz4KPHBhdGggZD0iTTQ1IDEzNUgxMzVWMTEyLjVINDVWMTM1Wk00NSA5MEgxMzVWNjcuNUg0NVY5MFpNNDUgNDVIMTM1VjIyLjVINDVWNDVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -270,7 +275,193 @@
             line-height: 1.6;
         }
 
-        /* Projects Section */
+        /* Certifications Section */
+        .certifications {
+            background: var(--primary-dark);
+            padding: 5rem 2rem;
+        }
+
+        .certifications-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cert-category {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background: rgba(45, 55, 72, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(74, 158, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cert-card:hover::before {
+            left: 100%;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(74, 158, 255, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        .cert-icon {
+            font-size: 2.5rem;
+            color: var(--accent-blue);
+            min-width: 60px;
+        }
+
+        .cert-content {
+            flex: 1;
+        }
+
+        .cert-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .cert-holder {
+            font-weight: 600;
+            color: var(--accent-light-blue);
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-achievement {
+            color: var(--accent-blue);
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-provider,
+        .cert-duration {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .cert-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .cert-badge,
+        .cert-logo {
+            min-width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .cert-badge.gold {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #8B4513;
+        }
+
+        .cert-badge.silver {
+            background: linear-gradient(135deg, #C0C0C0, #808080);
+            color: #2F2F2F;
+        }
+
+        .cert-badge.bronze {
+            background: linear-gradient(135deg, #CD7F32, #B87333);
+            color: #FFFFFF;
+        }
+
+        .cert-badge.shell {
+            background: linear-gradient(135deg, #4CAF50, #45A049);
+            color: #FFFFFF;
+        }
+
+        .cert-logo {
+            background: var(--accent-blue);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .harvard-logo {
+            background: #A51C30;
+        }
+
+        /* Card Type Specific Styles */
+        .icpc-card {
+            border-left: 4px solid #FF6B35;
+        }
+
+        .hp-card {
+            border-left: 4px solid #0096D6;
+        }
+
+        .harvard-card {
+            border-left: 4px solid #A51C30;
+        }
+
+        .code-card {
+            border-left: 4px solid #7665A0;
+        }
+
+        .tcl-card {
+            border-left: 4px solid #4CAF50;
+        }
+
+        .icpc-card:hover {
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .hp-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 150, 214, 0.2);
+        }
+
+        .harvard-card:hover {
+            box-shadow: 0 20px 40px rgba(165, 28, 48, 0.2);
+        }
+
+        .code-card:hover {
+            box-shadow: 0 20px 40px rgba(118, 101, 160, 0.2);
+        }
+
+        .tcl-card:hover {
+            box-shadow: 0 20px 40px rgba(76, 175, 80, 0.2);
+        }
         .projects {
             background: var(--secondary-dark);
             padding: 5rem 2rem;
@@ -602,6 +793,7 @@
                 <ul id="navMenu">
                     <li><a href="#home" class="nav-link active">Home</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#certifications" class="nav-link">Certifications</a></li>
                     <li><a href="#projects" class="nav-link">Projects</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
@@ -651,6 +843,166 @@
                 </div>
                 <h3>System & Network Admins</h3>
                 <p>2 System & Network Admins with expertise in Linux, Cisco, Microsoft, Networking, Virtualization. We ensure reliable, secure, and high-performing environments.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications">
+        <div class="certifications-container">
+            <h2 class="section-title scroll-reveal">Our Achievements & Certifications</h2>
+            
+            <!-- Programming Contests -->
+            <div class="cert-category">
+                <h3 class="category-title scroll-reveal">
+                    <i class="fas fa-trophy"></i>
+                    Programming Contests
+                </h3>
+                <div class="cert-grid">
+                    <div class="cert-card icpc-card scroll-reveal">
+                        <div class="cert-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <div class="cert-content">
+                            <h4>ICPC Egyptian Teens 2024</h4>
+                            <p class="cert-holder">Mohamed Afifi</p>
+                            <p class="cert-achievement">Honorable Mention</p>
+                            <p class="cert-date">May 31 - June 1, 2024</p>
+                        </div>
+                        <div class="cert-badge gold">
+                            <i class="fas fa-award"></i>
+                        </div>
+                    </div>
+
+                    <div class="cert-card icpc-card scroll-reveal">
+                        <div class="cert-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="cert-content">
+                            <h4>ICPC Egyptian Teens 2025 Online</h4>
+                            <p class="cert-holder">Mohamed Afifi</p>
+                            <p class="cert-achievement">90th Place</p>
+                            <p class="cert-date">May 2-3, 2025</p>
+                        </div>
+                        <div class="cert-badge silver">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                    </div>
+
+                    <div class="cert-card icpc-card scroll-reveal">
+                        <div class="cert-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="cert-content">
+                            <h4>ICPC Egyptian Teens 2025</h4>
+                            <p class="cert-holder">Adam Hossam</p>
+                            <p class="cert-achievement">139th Place</p>
+                            <p class="cert-date">May 2-3, 2025</p>
+                        </div>
+                        <div class="cert-badge bronze">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                    </div>
+
+                    <div class="cert-card icpc-card scroll-reveal">
+                        <div class="cert-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="cert-content">
+                            <h4>ICPC Egyptian Teens QPC 2025</h4>
+                            <p class="cert-holder">Both Adam & Mohamed</p>
+                            <p class="cert-achievement">Honorable Mention</p>
+                            <p class="cert-date">August 8, 2025</p>
+                        </div>
+                        <div class="cert-badge gold">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Certifications -->
+            <div class="cert-category">
+                <h3 class="category-title scroll-reveal">
+                    <i class="fas fa-graduation-cap"></i>
+                    Professional Certifications
+                </h3>
+                <div class="cert-grid">
+                    <div class="cert-card hp-card scroll-reveal">
+                        <div class="cert-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="cert-content">
+                            <h4>Data Science & Analytics</h4>
+                            <p class="cert-holder">Mohamed Afifi & Osama Samy</p>
+                            <p class="cert-provider">HP LIFE</p>
+                            <p class="cert-date">November 2023</p>
+                        </div>
+                        <div class="cert-logo">
+                            <span>HP</span>
+                        </div>
+                    </div>
+
+                    <div class="cert-card hp-card scroll-reveal">
+                        <div class="cert-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <div class="cert-content">
+                            <h4>IT for Business Success</h4>
+                            <p class="cert-holder">Mohamed Afifi</p>
+                            <p class="cert-provider">HP LIFE</p>
+                            <p class="cert-date">November 19, 2023</p>
+                        </div>
+                        <div class="cert-logo">
+                            <span>HP</span>
+                        </div>
+                    </div>
+
+                    <div class="cert-card harvard-card scroll-reveal">
+                        <div class="cert-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <div class="cert-content">
+                            <h4>CS50's Computer Science</h4>
+                            <p class="cert-holder">Osama Samy</p>
+                            <p class="cert-provider">HarvardX</p>
+                            <p class="cert-date">Verified Certificate</p>
+                        </div>
+                        <div class="cert-logo harvard-logo">
+                            <span>Harvard</span>
+                        </div>
+                    </div>
+
+                    <div class="cert-card code-card scroll-reveal">
+                        <div class="cert-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="cert-content">
+                            <h4>Computer Science Course A</h4>
+                            <p class="cert-holder">Mohamed Afifi</p>
+                            <p class="cert-provider">Code.org</p>
+                            <p class="cert-date">2023</p>
+                        </div>
+                        <div class="cert-logo">
+                            <span>CODE</span>
+                        </div>
+                    </div>
+
+                    <div class="cert-card tcl-card scroll-reveal">
+                        <div class="cert-icon">
+                            <i class="fas fa-terminal"></i>
+                        </div>
+                        <div class="cert-content">
+                            <h4>Mastering TCL Shell Scripting</h4>
+                            <p class="cert-holder">Mohamed Afifi</p>
+                            <p class="cert-duration">6 Hours, 15 Minutes</p>
+                            <p class="cert-date">May 27, 2025</p>
+                        </div>
+                        <div class="cert-badge shell">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -920,7 +1272,23 @@
 
         statsObserver.observe(document.querySelector('.hero-stats'));
 
-        // Add CSS for pulse animation
+        // Certifications Cards Animation
+        const certCards = document.querySelectorAll('.cert-card');
+        
+        certCards.forEach((card, index) => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+                card.style.zIndex = '10';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.zIndex = '1';
+            });
+            
+            // Staggered animation on scroll
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
         const style = document.createElement('style');
         style.textContent = `
             @keyframes pulse {
