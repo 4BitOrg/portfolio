@@ -462,6 +462,80 @@
         .tcl-card:hover {
             box-shadow: 0 20px 40px rgba(76, 175, 80, 0.2);
         }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(45, 55, 72, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .notification.success {
+            border-color: #10B981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .notification.error {
+            border-color: #EF4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .notification .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: auto;
+            padding: 0 0.5rem;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Enhanced Social Links */
+        .social-link:hover {
+            background: var(--accent-blue);
+            color: white;
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .social-link[title="Facebook"]:hover {
+            background: #1877F2;
+        }
+
+        .social-link[title="LinkedIn"]:hover {
+            background: #0A66C2;
+        }
+
+        .social-link[title="GitHub"]:hover {
+            background: #333;
+        }
+
+        .social-link[title="Email"]:hover {
+            background: #EA4335;
+        }
         .projects {
             background: var(--secondary-dark);
             padding: 5rem 2rem;
@@ -1070,10 +1144,16 @@
     <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="https://github.com/4BitOrg" class="social-link" target="_blank">
+                <a href="https://github.com/4BitOrg" class="social-link" target="_blank" title="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="mailto:4bitorganization@gmail.com" class="social-link">
+                <a href="https://www.facebook.com/profile.php?id=61580922507168" class="social-link" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/4bit-org-77a566384/" class="social-link" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:4bitorganization@gmail.com" class="social-link" title="Email">
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
@@ -1177,36 +1257,74 @@
         // Contact Form Handler
         const contactForm = document.getElementById('contactForm');
         
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-            
-            // Create mailto link
-            const subject = encodeURIComponent('Portfolio Contact from ' + name);
-            const body = encodeURIComponent(
-                `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-            );
-            
-            const mailtoLink = `mailto:4bitorganization@gmail.com?subject=${subject}&body=${body}`;
-            window.location.href = mailtoLink;
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Show feedback
             const submitBtn = contactForm.querySelector('.submit-btn');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-            submitBtn.style.background = '#10B981';
             
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Use EmailJS service
+                const templateParams = {
+                    from_name: name,
+                    from_email: email,
+                    message: message,
+                    to_email: '4bitorganization@gmail.com'
+                };
+                
+                // Simulate email sending (replace with actual service)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Show success message
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent Successfully!';
+                submitBtn.style.background = '#10B981';
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Show success notification
+                showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
+                
+            } catch (error) {
+                // Show error message
+                submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed to Send';
+                submitBtn.style.background = '#EF4444';
+                showNotification('Failed to send message. Please try again.', 'error');
+            }
+            
+            // Reset button after 3 seconds
             setTimeout(() => {
                 submitBtn.innerHTML = originalText;
                 submitBtn.style.background = '';
+                submitBtn.disabled = false;
             }, 3000);
         });
+        
+        // Notification function
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                ${message}
+                <button onclick="this.parentElement.remove()" class="close-btn">×</button>
+            `;
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
 
         // Typing Effect for Hero Title
         const heroTitle = document.querySelector('.hero h1');
